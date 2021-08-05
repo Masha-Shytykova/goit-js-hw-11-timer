@@ -15,12 +15,24 @@ class CountdownTimer {
       const targetDate = new Date('Aug 17, 2021');
       const currentTime = Date.now();
       const deltaTime = targetDate - currentTime;
-      const time = getTimeComponents(deltaTime);
+      const time = this.getTimeComponents(deltaTime);
 
       this.onTick(time);
-      //console.log(time);
-      // updateClockface(time);
     }, 1000);
+  }
+
+  pad(value) {
+    return String(value).padStart(2, '0');
+  }
+
+  getTimeComponents(time) {
+    const days = this.pad(Math.floor(time / (1000 * 60 * 60 * 24)));
+    const hours = this.pad(
+      Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+    );
+    const mins = this.pad(Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)));
+    const secs = this.pad(Math.floor((time % (1000 * 60)) / 1000));
+    return { days, hours, mins, secs };
   }
 }
 
@@ -47,19 +59,19 @@ const timer = new CountdownTimer({
 
 // timer.start();
 
-function pad(value) {
-  return String(value).padStart(2, '0');
-}
+// function pad(value) {
+//   return String(value).padStart(2, '0');
+// }
 
-function getTimeComponents(time) {
-  const days = pad(Math.floor(time / (1000 * 60 * 60 * 24)));
-  const hours = pad(
-    Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-  );
-  const mins = pad(Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)));
-  const secs = pad(Math.floor((time % (1000 * 60)) / 1000));
-  return { days, hours, mins, secs };
-}
+// function getTimeComponents(time) {
+//   const days = pad(Math.floor(time / (1000 * 60 * 60 * 24)));
+//   const hours = pad(
+//     Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+//   );
+//   const mins = pad(Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)));
+//   const secs = pad(Math.floor((time % (1000 * 60)) / 1000));
+//   return { days, hours, mins, secs };
+// }
 
 function updateClockface({ days, hours, mins, secs }) {
   daysEl.textContent = `${days}`;
@@ -67,44 +79,3 @@ function updateClockface({ days, hours, mins, secs }) {
   minsEl.textContent = `${mins}`;
   secsEl.textContent = `${secs}`;
 }
-
-// const colors = [
-//   '#FFFFFF',
-//   '#2196F3',
-//   '#4CAF50',
-//   '#FF9800',
-//   '#009688',
-//   '#795548',
-// ];
-
-// const startBtnEl = document.querySelector(
-//   'button[data-action="start"]',
-// );
-// const stopBtnEl = document.querySelector(
-//   'button[data-action="stop"]',
-// );
-// const bodyEl = document.querySelector("body");
-
-// const randomIntegerFromInterval = (min, max) => {
-//   return Math.floor(Math.random() * (max - min + 1) + min);
-// };
-
-// let timerId = null;
-
-// startBtnEl.addEventListener('click', onStartClick);
-// stopBtnEl.addEventListener('click', onStopClick);
-
-// //console.log(randomIntegerFromInterval(0, 5))
-// //console.log(colors[5]);
-
-// function onStartClick(e) {
-//   timerId = setInterval(() => {
-//     bodyEl.style.backgroundColor = colors[randomIntegerFromInterval(0, 5)];
-//   }, 1000);
-//   startBtnEl.setAttribute('disabled', true);
-// }
-
-// function onStopClick(e) {
-//   clearInterval(timerId);
-//   startBtnEl.removeAttribute('disabled');
-// }
