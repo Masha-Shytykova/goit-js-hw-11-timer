@@ -1,0 +1,22 @@
+body {
+  background-color: rgb(221, 221, 221);
+}
+.timer {
+  display: flex;
+  justify-content: center;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 100px;
+  margin: 10px;
+
+  background-color: black;
+  color: white;
+}
+
+.value {
+  font-size: 38px;
+}
