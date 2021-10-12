@@ -12,7 +12,7 @@ class CountdownTimer {
 
   start() {
     this.intervalId = setInterval(() => {
-      const targetDate = new Date('Aug 17, 2021');
+      const targetDate = new Date('Dec 31, 2021');
       const currentTime = Date.now();
       const deltaTime = targetDate - currentTime;
       const time = this.getTimeComponents(deltaTime);
